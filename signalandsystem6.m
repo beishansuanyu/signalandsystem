@@ -69,4 +69,35 @@ ylabel('power');
 title('audio in frequcy');
 
 
+plot (data);
 
+fs= Fs;
+fc = 500;
+[b,a] = butter(10,fc/(fs/2));
+##figure();
+##freqz(b,a,[],fs);
+
+signal_filter_butter_lowpass = filter(b,a,data);
+figure();
+plot(signal_filter_butter_lowpass);
+title ("butter_lowpass");
+
+fc = 2500;
+[b,a] = butter(10,fc/(fs/2),"high");
+##figure();
+##freqz(b,a,[],fs);
+
+signal_filter_butter_highpass = filter(b,a,data);
+figure();
+plot(signal_filter_butter_highpass);
+title ("butter_highpass");
+
+fc = 2500;
+[b,a] = butter(10,fc/(fs/2));
+##figure();
+##freqz(b,a,[],fs);
+
+signal_filter_butter_bondpass = filter(b,a,signal_filter_butter_highpass);
+figure();
+plot(signal_filter_butter_bondpass);
+title ("butter_bondpass");
