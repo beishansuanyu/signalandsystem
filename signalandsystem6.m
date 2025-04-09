@@ -101,3 +101,4 @@ signal_filter_butter_bondpass = filter(b,a,signal_filter_butter_highpass);
 figure();
 plot(signal_filter_butter_bondpass);
 title ("butter_bondpass");
+audiowrite('E:\Octaveworkspace\suitangzuoye\123456.wav',signal_filter_butter_bondpass,Fs);
