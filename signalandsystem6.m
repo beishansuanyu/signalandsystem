@@ -33,7 +33,7 @@ half_n = floor(n/2);
 tran_data1 = tran_data(1:half_n);
 fs_s1 = fs_s(1:half_n);
 subplot(2,1,1);
-plot(fs_s1,abs(tran_data1));
+plot(fs_s1,2.*abs(tran_data1));
 xlabel('f(hz)');
 ylabel('amplify');
 title('audio in frequcy');
@@ -50,7 +50,7 @@ tran_data2 = fft(data2);
 tran_data2 = tran_data2(1:half_n);
 figure();
 subplot(2,1,1);
-plot(fs_s1,abs(tran_data2));
+plot(fs_s1,2.*abs(tran_data2));
 xlabel('f(hz)');
 ylabel('amplify');
 title('audio in frequcy with hamming');
@@ -82,7 +82,23 @@ figure();
 plot(signal_filter_butter_lowpass);
 title ("butter_lowpass");
 
-fc = 2500;
+%%
+
+tran_data_lowpass = fft(signal_filter_butter_lowpass );
+tran_data_lowpass = tran_data_lowpass(1:half_n);
+figure();
+subplot(2,1,1);
+plot(fs_s1,2.*abs(tran_data_lowpass));
+xlabel('f(hz)');
+ylabel('amplify');
+title('audio in frequcy with lowpass');
+subplot(2,1,2);
+plot(fs_s1,angle(tran_data_lowpass));
+xlabel('f(hz)');
+ylabel('phase');
+%%
+
+fc = 500;
 [b,a] = butter(10,fc/(fs/2),"high");
 ##figure();
 ##freqz(b,a,[],fs);
@@ -91,6 +107,23 @@ signal_filter_butter_highpass = filter(b,a,data);
 figure();
 plot(signal_filter_butter_highpass);
 title ("butter_highpass");
+
+
+%%
+
+tran_data_highpass = fft(signal_filter_butter_highpass);
+tran_data_highpass = tran_data_highpass(1:half_n);
+figure();
+subplot(2,1,1);
+plot(fs_s1,2.*abs(tran_data_highpass));
+xlabel('f(hz)');
+ylabel('amplify');
+title('audio in frequcy with highpass');
+subplot(2,1,2);
+plot(fs_s1,angle(tran_data_highpass));
+xlabel('f(hz)');
+ylabel('phase');
+%%
 
 fc = 2500;
 [b,a] = butter(10,fc/(fs/2));
@@ -102,3 +135,19 @@ figure();
 plot(signal_filter_butter_bondpass);
 title ("butter_bondpass");
 audiowrite('E:\Octaveworkspace\suitangzuoye\123456.wav',signal_filter_butter_bondpass,Fs);
+
+%%
+
+tran_data_bondpass = fft(signal_filter_butter_bondpass);
+tran_data_bondpass = tran_data_bondpass(1:half_n);
+figure();
+subplot(2,1,1);
+plot(fs_s1,2.*abs(tran_data_bondpass));
+xlabel('f(hz)');
+ylabel('amplify');
+title('audio in frequcy with bondpass');
+subplot(2,1,2);
+plot(fs_s1,angle(tran_data_bondpass));
+xlabel('f(hz)');
+ylabel('phase');
+%%

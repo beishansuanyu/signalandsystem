@@ -28,7 +28,7 @@ sys = tf(num,den);
 z = roots(num);
 p = roots(den);
 
-
+figure();
 
 pzmap(sys);
 t = 0:0.1:100;
@@ -36,6 +36,7 @@ figure();
 impulse(sys);
 figure();
 step(sys);
+figure();
 bode(sys);
 
 
